@@ -1,6 +1,6 @@
 # huayuanzzb's blog
 
-个人学习笔记.
+[个人学习笔记](https://huayuanzzb.github.io)
 
 ### How to use
 ```
