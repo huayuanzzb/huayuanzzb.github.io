@@ -4,15 +4,14 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+### 前世
+偶然的一天，发现用markdown写笔记是一件挺好玩的事情，几乎同时，发现有道云笔记支持markdown语法，便如获至宝，把之前写在Evernote的笔记迁移到了有道云笔记。
+就这样和有道云笔记度过一段蜜月期。
+又是偶然的一天，想起来网易通行证(实际上就是126邮箱账号)的密码已经好几年没有修改了，安全起见，便要着手修改密码，万万没想到，当初填写的密保手机已经不再使用，修改密码只能上传身份证，这真的使我不能接受，所以只能舍弃这个账号。
+那么有道云笔记中的笔记怎么办呢？
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+### 今生
+好在Github Pages + Jekyll可以搭建支持markdown的个人博客。
+更加美妙的是Jeklly有很多themes可以选择。
+于是再加上Just-the-docs，便有了这个博客。
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
