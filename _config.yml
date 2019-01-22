@@ -28,7 +28,7 @@ github_username: praisebing
 markdown: kramdown
 # For local develop, will trigger a build warn notification from github since just-the-docs is not a supprted theme
 theme: just-the-docs
-# Fro github build
+# For github build
 remote_theme: pmarsceill/just-the-docs
 search_enabled: true
 plugins:
