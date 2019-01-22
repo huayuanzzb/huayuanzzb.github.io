@@ -1,11 +1,10 @@
 ---
 layout: post
-title:  PostgreSQL
-date:   2019-01-16 15:49:26 +0800
+title:  一些有用的查询
+date:   2019-01-22 15:49:26 +0800
+parent: PostgreSQL
+nav_order: 2
 categories: postgresql
-nav_order: 3
-has_children: true
-permalink: /docs/ui-components
 ---
 
 查询表占用空间
@@ -46,7 +45,7 @@ create table new_table (like old_table including constraints including defaults 
 ```
 
 临时禁用index
-```#
+```sql
 select indexrelid
 from pg_stat_all_indexes
 where indexrelname = 'order_odrer_number_owner_id_state_idx';
@@ -55,7 +54,7 @@ update pg_index set indisvalid='f' where indexrelid = '923778';
 ```
 
 死锁相关
-```#
+```sql
 -- 查询
 select *
 from pg_stat_activity aa,

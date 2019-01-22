@@ -2,6 +2,7 @@
 layout: post
 title:  oids
 date:   2019-01-16 15:49:26 +0800
+nav_order: 1
 parent: PostgreSQL
 categories: postgresql
 ---
@@ -25,7 +26,7 @@ regtype	| pg_type |	data type name |	integer
 oid允许带schema的查询。
 
 ### 例子
-```
+```sql
 postgres=# select 'test'::regclass::int;
  int4
 -------
