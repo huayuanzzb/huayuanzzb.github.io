@@ -90,7 +90,7 @@ public class TestDruid {
                     count++;
                 }
             }
-            System.out.println("prepared statement fetch " + count + " cost: " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println("prepared statement fetch count " + count + " cost: " + (System.currentTimeMillis() - start) + " ms");
         } catch (Exception e){
             //
         }finally {
@@ -115,7 +115,7 @@ public class TestDruid {
                     count++;
                 }
             }
-            System.out.println("statement fetch " + count + " cost: " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println("statement fetch count " + count + " cost: " + (System.currentTimeMillis() - start) + " ms");
         } catch (Exception e){
             //
         }finally {
@@ -156,23 +156,23 @@ public class TestDruid {
 
 | case | PreparedStatement | Statement |
 | --- | --- | --- |
-| test 0 | fetch 129 cost: 6586 ms | fetch 131 cost: 11426 ms |
-| test 1 | fetch 107 cost: 7017 ms | fetch 116 cost: 7791 ms |
-| test 2 | fetch 129 cost: 7017 ms | fetch 148 cost: 8191 ms |
-| test 3 | fetch 125 cost: 7223 ms | fetch 130 cost: 9176 ms |
-| test 4 | fetch 124 cost: 6866 ms | fetch 133 cost: 8228 ms |
-| test 5 | fetch 116 cost: 6677 ms | fetch 141 cost: 8097 ms |
-| test 6 | fetch 117 cost: 6074 ms | fetch 131 cost: 7915 ms |
-| test 7 | fetch 135 cost: 6858 ms | fetch 136 cost: 7875 ms |
-| test 8 | fetch 141 cost: 6847 ms | fetch 113 cost: 7323 ms |
-| test 9 | fetch 126 cost: 6529 ms | fetch 142 cost: 8472 ms |
-| test 10 | fetch 135 cost: 6650 ms | fetch 143 cost: 11611 ms |
-| test 11 | fetch 127 cost: 13707 ms | fetch 133 cost: 8699 ms |
-| test 12 | fetch 122 cost: 7302 ms | fetch 114 cost: 7424 ms |
-| test 13 | fetch 128 cost: 6232 ms | fetch 128 cost: 7099 ms |
-| test 14 | fetch 124 cost: 6296 ms | fetch 139 cost: 7499 ms |
-| test 15 | fetch 124 cost: 6548 ms | fetch 125 cost: 7512 ms |
-| test 16 | fetch 123 cost: 6148 ms | fetch 134 cost: 7686 ms |
-| test 17 | fetch 126 cost: 6434 ms | fetch 132 cost: 7257 ms |
-| test 18 | fetch 123 cost: 5508 ms | fetch 113 cost: 8778 ms |
-| test 19 | fetch 135 cost: 6103 ms | fetch 133 cost: 9025 ms |
+| test 0 | fetch count 129 cost: 6586 ms | fetch count 131 cost: 11426 ms |
+| test 1 | fetch count 107 cost: 7017 ms | fetch count 116 cost: 7791 ms |
+| test 2 | fetch count 129 cost: 7017 ms | fetch count 148 cost: 8191 ms |
+| test 3 | fetch count 125 cost: 7223 ms | fetch count 130 cost: 9176 ms |
+| test 4 | fetch count 124 cost: 6866 ms | fetch count 133 cost: 8228 ms |
+| test 5 | fetch count 116 cost: 6677 ms | fetch count 141 cost: 8097 ms |
+| test 6 | fetch count 117 cost: 6074 ms | fetch count 131 cost: 7915 ms |
+| test 7 | fetch count 135 cost: 6858 ms | fetch count 136 cost: 7875 ms |
+| test 8 | fetch count 141 cost: 6847 ms | fetch count 113 cost: 7323 ms |
+| test 9 | fetch count 126 cost: 6529 ms | fetch count 142 cost: 8472 ms |
+| test 10 | fetch count 135 cost: 6650 ms | fetch count 143 cost: 11611 ms |
+| test 11 | fetch count 127 cost: 13707 ms | fetch count 133 cost: 8699 ms |
+| test 12 | fetch count 122 cost: 7302 ms | fetch count 114 cost: 7424 ms |
+| test 13 | fetch count 128 cost: 6232 ms | fetch count 128 cost: 7099 ms |
+| test 14 | fetch count 124 cost: 6296 ms | fetch count 139 cost: 7499 ms |
+| test 15 | fetch count 124 cost: 6548 ms | fetch count 125 cost: 7512 ms |
+| test 16 | fetch count 123 cost: 6148 ms | fetch count 134 cost: 7686 ms |
+| test 17 | fetch count 126 cost: 6434 ms | fetch count 132 cost: 7257 ms |
+| test 18 | fetch count 123 cost: 5508 ms | fetch count 113 cost: 8778 ms |
+| test 19 | fetch count 135 cost: 6103 ms | fetch count 133 cost: 9025 ms |
