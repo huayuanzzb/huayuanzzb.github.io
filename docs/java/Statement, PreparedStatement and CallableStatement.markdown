@@ -1,3 +1,12 @@
+---
+layout: post
+title:  Statement, PreparedStatement and CallableStatement
+date:   2019-01-24 17:25:26 +0800
+nav_order: 2
+parent: java
+categories: java
+---
+
 Java 提供了 3 个不同的接口与数据库交互:
 * Statement: 执行 sql query, 仅支持静态 sql
 * PreparedStatement: 执行 sql query, 支持参数化的查询
