@@ -17,6 +17,7 @@ Java 提供了 3 个不同的接口与数据库交互:
 ### Statement
 1. 仅支持静态sql，如果有参数，必须拼接在sql中，易造成sql注入
 2. 每次查询都会重新解析编译sql语句
+
 ### PreparedStatement
 1. 支持参数化的动态sql，自动转义敏感字符，有效地防止sql注入
 2. 首次查询会执行4个阶段，后续就只执行第4个阶段，提高性能
@@ -152,6 +153,7 @@ public class TestDruid {
 }
 ```
 #### 结果
+
 | case | PreparedStatement | Statement |
 | --- | --- | --- |
 | test 0 | fetch 129 cost: 6586 ms | fetch 131 cost: 11426 ms |
