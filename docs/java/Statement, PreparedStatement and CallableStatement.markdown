@@ -13,28 +13,28 @@ Java 提供了 3 个不同的接口与数据库交互:
 * CallableStatement: 执行存储过程或者函数
 
 其中，Statement 和 PreparedStatement 较常用。
-###
-jdbc 查询分为4个阶段：
-1. 解析sql
-2. 编译sql
-3. 获取执行计划
-4. 执行查询并返回数据
+
 ### Statement
 1. 仅支持静态sql，如果有参数，必须拼接在sql中，易造成sql注入
-2. 每次查询都会重新执行4个阶段
+2. 每次查询都会重新解析编译sql语句
 ### PreparedStatement
 1. 支持参数化的动态sql，自动转义敏感字符，有效地防止sql注入
 2. 首次查询会执行4个阶段，后续就只执行第4个阶段，提高性能
 
 ### 分析
+jdbc 查询分为4个阶段：
+1. 解析sql
+2. 编译sql
+3. 获取执行计划
+4. 执行查询并返回数据
+
 基于 Postgresql JDBC 驱动源码分析。
-#### PreparedStatement
 追溯```conn.prepareStatement("select * from _order where id = ?")```, 可以发现在创建PreparedStatement时，会执行
 ```java
 // 解析sql，并转义其中的敏感字符
 String parsed_sql = replaceProcessing(sql);
-        if (isCallable)
-            parsed_sql = modifyJdbcCall(parsed_sql);
+    if (isCallable)
+        parsed_sql = modifyJdbcCall(parsed_sql);
 // 创建参数化的Query
 this.preparedQuery = connection.getQueryExecutor().createParameterizedQuery(parsed_sql);
 this.preparedParameters = preparedQuery.createParameterList();
