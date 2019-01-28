@@ -14,19 +14,23 @@ Spring AOP 使用JDK动态代理或者cglib创建动态代理，那么Spring是�
 
 综上所述，在两者都能使用时，spring默认优先选择JDK动态代理。
 ### 原理
+
 #### JDK 动态代理
+
 关键的类是```java.lang.reflect.Proxy``` 和 ```java.lang.reflect.InvocationHandler```，Proxy负责生成代理对象，对代理对象的调用会被dispatch到InvocationHandler.invoke方法中，在invoke方法中可以完成代理操作。
+
 #### cglib
 cglib 是一个开源库，它可以在java运行时于内存中创建并加载class文件。
 关键类是```net.sf.cglib.proxy.MethodInterceptor``` 和 ```net.sf.cglib.proxy.Enhancer```，Proxy负责生成代理对象，对代理对象的调用会被dispatch到MethodInterceptor.intercept方法中，在intercept方法中可以完成代理操作。
 ### 对比
+
 #### JDK 动态代理
 * JDK自带，不依赖于第三方库
 * 只能基于接口生成代理对象
+
 #### cglib
 * 基于asm字节码技术，直接修改类的字节码，可以代理任何非final类，cglib的原理是生成一个目标类的子类，因此不能代理final类和final方法，因为final修饰的类或方法不能被覆写
 * 代理对象的构造方法会被调用两次(spring文档中提到的，自己的示例代码并没有测试出来)。
-### JDK 动态代理
 
 ### 示例
 ```java
