@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  oids
+title:  搭建git server
 date:   2019-01-28 08:49:26 +0800
 nav_order: 2
 parent: others
