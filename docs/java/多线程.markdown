@@ -11,7 +11,7 @@ categories: java
 
 java 的synchronized实际上就是这样一种锁，它可以修饰方法，也可以修饰一个代码块。
 
-当我们使用synchronized时，java内部使用monitor提供synchronization机制, monitor绑定到一个对象上。
+当我们使用synchronized时，java内部使用monitor提供synchronization机制, monitor绑定到一个对象上。
 当某个线程成功获取锁，我们称该线程进入了monitor。
 在monitor中的线程退出monitor之前，其他试图进入monitor的线程只能等待。
 
@@ -211,3 +211,17 @@ Fri Jan 25 17:24:52 CST 2019 - Thread-0 wake up
 main thread will exit
 ```
 
+```ReentrantLock```有四个获取锁的方法：
+* ```void lock();```: 在等待获取锁的过程中休眠并禁止一切线程调度
+* ```void lockInterruptibly() throws InterruptedException;```: 在等待获取锁的过程中可以被中断   
+* ```boolean tryLock();```: 获取到锁返回true, 否则返回false
+* ```boolean tryLock(long time, TimeUnit unit) throws InterruptedException;```: 在指定时间内等待获取锁；过程中可被中断
+假如线程A和线程B使用同一个锁LOCK，此时线程A首先获取到锁LOCK.lock()，并且始终持有不释放。如果此时B要去获取锁，有四种方式：
+
+* LOCK.lock(): 此方式会始终处于等待中，即使调用B.interrupt()也不能中断，除非线程A调用LOCK.unlock()释放锁。
+
+* LOCK.lockInterruptibly(): 此方式会等待，但当调用B.interrupt()会被中断等待，并抛出InterruptedException异常，否则会与lock()一样始终处于等待中，直到线程A释放锁。
+
+* LOCK.tryLock(): 该处不会等待，获取不到锁并直接返回false，去执行下面的逻辑。
+
+* LOCK.tryLock(10, TimeUnit.SECONDS)：该处会在10秒时间内处于等待中，但当调用B.interrupt()会被中断等待，并抛出InterruptedException。10秒时间内如果线程A释放锁，会获取到锁并返回true，否则10秒过后会获取不到锁并返回false，去执行下面的逻辑。
