@@ -1,4 +1,4 @@
-# praisebing's blog
+# blog
 
 [个人学习笔记](https://praisebing.github.io)
 
