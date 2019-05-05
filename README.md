@@ -4,6 +4,7 @@
 
 ### How to use
 ```
+gem install bundler jekyll
 jekyll clean
 jekyll build
 bundle exec jekyll serve
