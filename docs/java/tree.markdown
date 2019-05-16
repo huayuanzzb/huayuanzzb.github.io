@@ -8,7 +8,7 @@ categories: java
 ---
 <!-- 加入数学公式库 -->
 <head>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 </head>
 
 *以下内容摘自《数据结构 C语言版》第六章*
