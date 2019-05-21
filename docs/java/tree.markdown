@@ -94,3 +94,125 @@ public class Node {
 显而易见，$$n_0$$、$$n_1$$、$$n_2$$中的空链域分别是2、1、0，那么 $$N=n_1 + 2 * n_0$$  
 又，二叉树的性质 $$n_0 = n_2 + 1$$  
 可得 $$N = n_1 + 2 * n_0 = n_0 + n_1 + n_2 + 1 = n + 1$$
+
+## 二叉树的遍历
+### 层次遍历
+### 前序、中序和后序遍历
+一般将二叉树的 left Node、root 和 right Node 分别记为 L、D、R，那么前序、中序和后序遍历得顺序分别为DLR、LDR、LRD。也即 L永远在 R 的前边，不同的是 D 出现的位置。
+#### 递归遍历
+不管是从人类理解角度还是代码简洁渡方面，递归遍历都是一种比较简单的方法。  
+***使用递归，三种遍历方法唯一的不同就是“使用 Node”的”时机“不同***
+```java
+public class BiTree<T> {
+
+  class Node<T> {
+    Node left;
+    Node right;
+    T value;
+
+    Node(T value) {
+      this.value = value;
+    }
+  }
+
+  private Node<T> root;
+
+  // 遍历类型
+  public enum TType {
+    PRE_ORDER, IN_ORDER, POST_ORDER
+  }
+
+  // 遍历
+  public List<Comparable> traversal(TType tType) {
+      List <Comparable> list = new LinkedList<>();
+      traversal(root, list, tType);
+      return list;
+  }
+
+  // 三种遍历的唯一区别是list.add(node.value)的调用点不同
+  private void traversal(Node node, List<Comparable> list, TType tType) {
+      if(TType.PRE_ORDER == tType) list.add(node.value);
+      if(node.left != null) traversal(node.left, list, tType);
+      if(TType.IN_ORDER == tType) list.add(node.value);
+      if(node.right != null) traversal(node.right, list, tType);
+      if(TType.POST_ORDER == tType) list.add(node.value);
+    }
+}
+```
+#### 非递归遍历
+除了递归，还可以使用 “循环 + 栈” 进行遍历。  
+```java
+public class BiTree<T> {
+
+  class Node<T> {
+    Node left;
+    Node right;
+    T value;
+
+    Node(T value) {
+      this.value = value;
+    }
+  }
+
+  private Node<T> root;
+
+  // 前序遍历
+  public List<T> preOrder() {
+    List<T> list = new LinkedList<>();
+    Stack<Node<T>> stack = new Stack<>();
+    Node<T> curr = root;
+    while(curr != null || !stack.isEmpty()) {
+      if(curr != null) {
+        stack.push(curr);
+        list.add(curr.value);
+        curr = curr.left;
+      } else {
+        curr = stack.pop().right;
+      }
+    }
+    return list;
+  }
+
+  // 中序遍历
+  public List<T> inOrder() {
+    List<T> list = new LinkedList<>();
+    Stack<Node<T>> stack = new Stack<>();
+    Node<T> curr = root;
+    while(curr != null || !stack.isEmpty()) {
+      if(curr != null) {
+        stack.push(curr);
+        curr = curr.left;
+      } else {
+        curr = stack.pop();
+        list.add(curr.value);
+        curr = curr.right;
+      }
+    }
+    return list;
+  }
+
+  // 后序遍历
+  // 相比其他两种遍历，后续遍历处理起来较为麻烦。主要的不同在对right节点的处理。
+  public List<T> postOrder() {
+    List<T> list = new LinkedList<>();
+    Stack<Node<T>> stack = new Stack<>();
+    Node<T> curr = root;
+    Node<T> pre = null;
+    while(curr != null || !stack.isEmpty()) {
+      if(curr != null) {
+        stack.push(curr);
+        curr = curr.left;
+      } else {
+        Node tmp = stack.peek();
+        if(tmp.right == null || tmp.right == pre) {
+          list.add(stack.pop().value);
+          pre = tmp;
+        }else{
+          curr = curr.right;
+        }
+      }
+    }
+    return list;
+  }
+}
+```

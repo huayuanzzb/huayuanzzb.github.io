@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Statement, PreparedStatement and CallableStatement
+title:  JDBC Statement
 date:   2019-01-24 17:25:26 +0800
 nav_order: 2
 parent: java

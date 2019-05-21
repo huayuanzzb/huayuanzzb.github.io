@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  为什么重写equals一定要重写hashcode
+title:  equals & hashcode
 date:   2019-05-15 17:25:26 +0800
 nav_order: 1
 parent: java
