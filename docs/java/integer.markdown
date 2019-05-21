@@ -1,0 +1,110 @@
+---
+layout: post
+title:  Integer 类解析
+date:   2019-05-21 17:25:26 +0800
+nav_order: 1
+parent: java
+categories: java
+---
+
+<!-- 加入数学公式库 -->
+<head>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+</head>
+
+> Integer 是一个常用的类，其中的一些方法实现非常值得探索。
+
+## parseInt(String s, int radix)
+### 理论
+该方法将一个 radix 进制（radix取值范围为 2 ~ 36，即最多使用字母加数字表示数位）表示的字符串转换成一个十进制的有符号整数（取值范围是 $$-2^{31}$$ ~ ($$2^{31}-1$$)，即 -2147483648 ~ 2147483647）。
+
+该方法实现基于一个基本数学知识:  
+任何一个 r 进制数 $$X_1X_2...X_n$$ 转换为十进制数 N 的计算过程为
+
+$$N = \sum_{i=1}^n X_i * r^{n-i}$$
+
+如16进制数 FE 转换为10进制过程为  
+
+$$N = F * 16^{2-1} + E * 16^{2-2}
+    = F * 16 + E * 1 
+    = 15 * 16 + 14 * 1 
+    = 254$$
+
+### 异常处理
+计算机不同于人脑，每种数据类型都有一定的取值范围，所以在使用计算机处理数字问题时要考虑 overflow 问题。
+
+如以下 java 代码，IDE 就首先会提示```Numeric overflow```
+```java
+// 实际输出为 -2147483646
+System.out.println(2147483647 + 3);
+```
+上述例子也说明我们在判断两个 ***正整数*** 的和是否 overflow 时不能使用 ``` a + b <= Integer.MAX_VALUE;```，而应该使用 ```a <= Integer.MAX_VALUE - b;```；相应地，```Integer.MIN_VALUE``` 需要类似处理。
+### 源码
+Oracle JDK1.8 中正是基于以上[理论](#理论)和[异常处理](#异常处理)实现的。  
+除此之外，还有一个技巧：将正数变通为负数处理，不需要分别对待正数和正数，简化整个处理过程。
+```java
+public static int parseInt(String s, int radix)
+                throws NumberFormatException
+    {
+        /*
+         * WARNING: This method may be invoked early during VM initialization
+         * before IntegerCache is initialized. Care must be taken to not use
+         * the valueOf method.
+         */
+
+        if (s == null) {
+            throw new NumberFormatException("null");
+        }
+
+        if (radix < Character.MIN_RADIX) {
+            throw new NumberFormatException("radix " + radix +
+                                            " less than Character.MIN_RADIX");
+        }
+
+        if (radix > Character.MAX_RADIX) {
+            throw new NumberFormatException("radix " + radix +
+                                            " greater than Character.MAX_RADIX");
+        }
+
+        int result = 0;
+        boolean negative = false;
+        int i = 0, len = s.length();
+        int limit = -Integer.MAX_VALUE;
+        int multmin;
+        int digit;
+
+        if (len > 0) {
+            char firstChar = s.charAt(0);
+            if (firstChar < '0') { // Possible leading "+" or "-"
+                if (firstChar == '-') {
+                    negative = true;
+                    limit = Integer.MIN_VALUE;
+                } else if (firstChar != '+')
+                    throw NumberFormatException.forInputString(s);
+
+                if (len == 1) // Cannot have lone "+" or "-"
+                    throw NumberFormatException.forInputString(s);
+                i++;
+            }
+            multmin = limit / radix;
+            while (i < len) {
+                // Accumulating negatively avoids surprises near MAX_VALUE
+                digit = Character.digit(s.charAt(i++),radix);
+                if (digit < 0) {
+                    throw NumberFormatException.forInputString(s);
+                }
+                if (result < multmin) {
+                    throw NumberFormatException.forInputString(s);
+                }
+                result *= radix;
+                if (result < limit + digit) {
+                    throw NumberFormatException.forInputString(s);
+                }
+                result -= digit;
+            }
+        } else {
+            throw NumberFormatException.forInputString(s);
+        }
+        return negative ? result : -result;
+    }
+```
