@@ -1,6 +1,6 @@
 # blog
 
-[个人学习笔记](https://praisebing.github.io)
+[个人学习笔记](https://recaton.github.io)
 
 ### How to use
 ```
