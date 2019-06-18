@@ -73,6 +73,8 @@ ALTER ROLE xxxxxx CONNECTION LIMIT -1;
 ```
 生成随机字符串
 ```sql
--- 生成8位随机字符
+-- 随机生成8位字符
 select string_agg(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', ceil(random() * 62)::integer, 1), '') FROM generate_series(1, 8);
+-- 随机生成10个汉字
+select string_agg(chr(19968+(random()*20901)::int), '') from generate_series(1,10);
 ```
