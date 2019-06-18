@@ -2,7 +2,7 @@
 layout: post
 title:  "搭建 git 服务器"
 author: recaton
-categories: [ Jekyll, tutorial ]
+categories: [ git ]
 image: assets/images/12.jpg
 featured: true
 hidden: true
