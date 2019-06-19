@@ -78,3 +78,13 @@ select string_agg(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01
 -- 随机生成10个汉字
 select string_agg(chr(19968+(random()*20901)::int), '') from generate_series(1,10);
 ```
+
+生成查询某个 schema 下所有表记录数的 sql
+```sql
+SELECT string_agg('select ''' || c.relname || ''', count(1) from ' || c.relname, ' union all ')
+        FROM pg_catalog.pg_class c
+        LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+        WHERE c.relkind IN ('r')
+        AND n.nspname = 'public'
+        ORDER BY 1;
+```
