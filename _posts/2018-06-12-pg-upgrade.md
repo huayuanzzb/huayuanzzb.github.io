@@ -102,6 +102,8 @@ test=# SELECT pglogical.replication_set_add_all_tables('default', ARRAY['public'
 --------------------------------
  t
 (1 row)
+# 如果replication_set_add_all_tables 出现 deadlock, 可尝试逐个表添加
+postgres@provider:~$ for i in `psql test -c '\d' | grep table | cut -d '|' -f 2`; do psql test -c "select pglogical.replication_set_add_table('default', '$i')"; done
 # subscriber
 test=# SELECT pglogical.create_node(node_name := 'subscriber', dsn := 'host=localhost port=5432 dbname=test');
  create_node
